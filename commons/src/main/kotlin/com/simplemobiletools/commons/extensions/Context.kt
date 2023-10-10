@@ -474,22 +474,15 @@ fun Context.getUriMimeType(path: String, newUri: Uri): String {
     return mimeType
 }
 
-fun Context.isThankYouInstalled() = isPackageInstalled("com.simplemobiletools.thankyou")
+fun Context.isThankYouInstalled() = returnTrue()
 
-fun Context.isOrWasThankYouInstalled(): Boolean {
-    return when {
-        resources.getBoolean(R.bool.pretend_thank_you_installed) -> true
-        baseConfig.hadThankYouInstalled -> true
-        isThankYouInstalled() -> {
-            baseConfig.hadThankYouInstalled = true
-            true
-        }
+fun Context.isOrWasThankYouInstalled() = returnTrue()
 
-        else -> true
-    }
+fun Context.isAProApp() = returnTrue()
+
+fun returnTrue(): Boolean {
+    return true
 }
-
-fun Context.isAProApp() = packageName.startsWith("com.simplemobiletools.") && packageName.removeSuffix(".debug").endsWith(".pro")
 
 fun Context.getCustomizeColorsString(): String {
     val textId = if (isOrWasThankYouInstalled()) {
